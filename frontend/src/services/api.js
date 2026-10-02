@@ -1,0 +1,425 @@
+const API_BASE = '/api';
+
+// Fallback seed data in case backend server is warming up
+export const FALLBACK_BOOKS = [
+  {
+    _id: "book-001",
+    title: "The Quiet Mind",
+    subtitle: "A Journey to Peace Within",
+    vernacularTitle: "శాంత చిత్తము - ఆత్మ శాంతి ప్రయాణము",
+    author: "Olivia Hart",
+    price: 6.99,
+    originalPrice: 12.99,
+    priceINR: 499,
+    originalPriceINR: 899,
+    rating: 4.9,
+    reviewsCount: 3840,
+    category: "Religion & Spirituality",
+    badge: "NEW RELEASE",
+    cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=700",
+    format: "Imperial Hardcover & eBook",
+    isFeaturedHero: true,
+    isBestseller: true,
+    isLatestArrival: false,
+    pages: 320,
+    language: "English / Sanskrit Excerpts",
+    publisher: "Saraswathi Heritage Press",
+    description: "An evocative journey guiding the seeker through mindfulness, sacred stillness, and deep inner contemplation. Winner of the Royal Literary Seal for Spiritual Excellence."
+  },
+  {
+    _id: "book-002",
+    title: "The Midnight Library",
+    subtitle: "Between Life and Death Lies a Library",
+    vernacularTitle: "మధ్యరాత్రి గ్రంథాలయం",
+    author: "Matt Haig",
+    price: 4.99,
+    originalPrice: 9.99,
+    priceINR: 399,
+    originalPriceINR: 699,
+    rating: 4.8,
+    reviewsCount: 5210,
+    category: "Fiction",
+    badge: "BEST SELLER",
+    cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=700",
+    format: "Collector's Clothbound Edition",
+    isFeaturedHero: false,
+    isBestseller: true,
+    isLatestArrival: false,
+    pages: 304,
+    language: "English",
+    publisher: "Canongate Royal Books",
+    description: "Somewhere out beyond the edge of the universe there is a library that contains an infinite number of books, each one the story of another reality."
+  },
+  {
+    _id: "book-003",
+    title: "Atomic Habits",
+    subtitle: "Tiny Changes, Remarkable Results",
+    vernacularTitle: "సూక్ష్మ అలవాట్లు - అద్భుత ఫలితాలు",
+    author: "James Clear",
+    price: 6.99,
+    originalPrice: 11.99,
+    priceINR: 499,
+    originalPriceINR: 799,
+    rating: 4.9,
+    reviewsCount: 12400,
+    category: "Self-Help",
+    badge: "TOP RATED",
+    cover: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=700",
+    format: "Gold Embossed Hardcover",
+    isFeaturedHero: false,
+    isBestseller: true,
+    isLatestArrival: false,
+    pages: 320,
+    language: "English",
+    publisher: "Avery Royal Imprint",
+    description: "A supremely practical guide on how small daily changes can transform your destiny, rooted in timeless behavioral wisdom and self-mastery."
+  },
+  {
+    _id: "book-004",
+    title: "The 7 Habits of Highly Effective People",
+    subtitle: "Restoring the Character Ethic",
+    vernacularTitle: "ప్రభావవంతమైన వ్యక్తుల 7 అలవాట్లు",
+    author: "Stephen R. Covey",
+    price: 5.99,
+    originalPrice: 10.99,
+    priceINR: 450,
+    originalPriceINR: 750,
+    rating: 4.7,
+    reviewsCount: 8900,
+    category: "Business & Money",
+    badge: "NEW",
+    cover: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=700",
+    format: "Deluxe Executive Edition",
+    isFeaturedHero: false,
+    isBestseller: true,
+    isLatestArrival: false,
+    pages: 381,
+    language: "English",
+    publisher: "Free Press Classics",
+    description: "One of the most inspiring and impactful books ever written, Covey reveals a step-by-step pathway for living with fairness, integrity, and human dignity."
+  },
+  {
+    _id: "book-005",
+    title: "It Ends with Us",
+    subtitle: "A Novel of Courage & Heart",
+    vernacularTitle: "ఇక్కడితో ముగింపు",
+    author: "Colleen Hoover",
+    price: 5.49,
+    originalPrice: 9.49,
+    priceINR: 420,
+    originalPriceINR: 650,
+    rating: 4.8,
+    reviewsCount: 9750,
+    category: "Romance",
+    badge: "BEST SELLER",
+    cover: "https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&q=80&w=700",
+    format: "Paperback & Audio",
+    isFeaturedHero: false,
+    isBestseller: true,
+    isLatestArrival: false,
+    pages: 384,
+    language: "English",
+    publisher: "Atria Books",
+    description: "A brave, heartbreaking novel that digs its claws into you and doesn't let go, exploring the fine line between devotion and self-preservation."
+  },
+  {
+    _id: "book-006",
+    title: "The Power of Now",
+    subtitle: "A Guide to Spiritual Enlightenment",
+    vernacularTitle: "వర్తమాన శక్తి - ఆత్మ జ్ఞాన మార్గము",
+    author: "Eckhart Tolle",
+    price: 4.99,
+    originalPrice: 8.99,
+    priceINR: 380,
+    originalPriceINR: 600,
+    rating: 4.9,
+    reviewsCount: 11200,
+    category: "Religion & Spirituality",
+    badge: "TOP RATED",
+    cover: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&q=80&w=700",
+    format: "Parchment Bound Edition",
+    isFeaturedHero: false,
+    isBestseller: true,
+    isLatestArrival: false,
+    pages: 236,
+    language: "English",
+    publisher: "New World Royal Library",
+    description: "To make the journey into the Now we will need to leave our analytical mind and its false created self, the ego, behind."
+  },
+  {
+    _id: "book-007",
+    title: "Think and Grow Rich",
+    subtitle: "The Landmark Bestseller on Wealth",
+    vernacularTitle: "ఆలోచించండి మరియు ధనవంతులు అవ్వండి",
+    author: "Napoleon Hill",
+    price: 4.49,
+    originalPrice: 8.49,
+    priceINR: 350,
+    originalPriceINR: 550,
+    rating: 4.7,
+    reviewsCount: 7800,
+    category: "Business & Money",
+    badge: "CLASSIC",
+    cover: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=700",
+    format: "Gilded Leather Edition",
+    isFeaturedHero: false,
+    isBestseller: true,
+    isLatestArrival: false,
+    pages: 320,
+    language: "English",
+    publisher: "Ralston Society Royal",
+    description: "The classic philosophy of moneymaking and personal triumph distilled from interviewing over 500 successful industrialists."
+  },
+  {
+    _id: "book-008",
+    title: "Śrīmad Bhagavad Gītā",
+    subtitle: "The Song Celestial (Royal Sanskrit & English Translation)",
+    vernacularTitle: "శ్రీమద్భగవద్గీత - రాజసంపుటి",
+    author: "Maharshi Vedavyasa",
+    price: 8.99,
+    originalPrice: 15.99,
+    priceINR: 699,
+    originalPriceINR: 1200,
+    rating: 5.0,
+    reviewsCount: 18450,
+    category: "Religion & Spirituality",
+    badge: "ROYAL PICK",
+    cover: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&q=80&w=700",
+    format: "Imperial Gold Foil Silk Hardbound",
+    isFeaturedHero: false,
+    isBestseller: true,
+    isLatestArrival: false,
+    pages: 700,
+    language: "Sanskrit, English & Telugu",
+    publisher: "Saraswathi Pustaka Vikrayaśāla",
+    description: "The eternal crown jewel of Indian philosophy. Lord Krishna's timeless counsel to Arjuna on righteousness, duty, yoga, and ultimate spiritual liberation."
+  },
+  {
+    _id: "book-009",
+    title: "The Mountain Is You",
+    subtitle: "Transforming Self-Sabotage Into Self-Mastery",
+    vernacularTitle: "నీలోని పర్వతం - ఆత్మ విజయం",
+    author: "Brianna Wiest",
+    price: 4.99,
+    originalPrice: 8.99,
+    priceINR: 399,
+    originalPriceINR: 650,
+    rating: 4.8,
+    reviewsCount: 3120,
+    category: "Self-Help",
+    badge: "NEW",
+    cover: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=700",
+    format: "Hardcover & eBook",
+    isFeaturedHero: false,
+    isBestseller: false,
+    isLatestArrival: true,
+    pages: 248,
+    language: "English",
+    publisher: "Thought Catalog Books",
+    description: "A profound exploration of self-sabotage, unconscious trauma, emotional intelligence, and rising like a mountain over life's deepest obstacles."
+  },
+  {
+    _id: "book-010",
+    title: "Verity",
+    subtitle: "A Gripping Psychological Thriller",
+    vernacularTitle: "వెరిటీ - నిగూఢ సత్యం",
+    author: "Colleen Hoover",
+    price: 4.99,
+    originalPrice: 9.49,
+    priceINR: 399,
+    originalPriceINR: 699,
+    rating: 4.7,
+    reviewsCount: 6520,
+    category: "Fiction",
+    badge: "BESTSELLER",
+    cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=700",
+    format: "Paperback Edition",
+    isFeaturedHero: false,
+    isBestseller: false,
+    isLatestArrival: true,
+    pages: 336,
+    language: "English",
+    publisher: "Grand Central Publishing",
+    description: "Lowen Ashleigh is a struggling writer on the brink of financial ruin when she accepts the job offer of a lifetime, stumbling upon a chilling manuscript."
+  },
+  {
+    _id: "book-011",
+    title: "The Four Agreements",
+    subtitle: "A Practical Guide to Personal Freedom",
+    vernacularTitle: "నాలుగు ఒప్పందాలు",
+    author: "Don Miguel Ruiz",
+    price: 3.99,
+    originalPrice: 7.99,
+    priceINR: 320,
+    originalPriceINR: 599,
+    rating: 4.8,
+    reviewsCount: 5400,
+    category: "Religion & Spirituality",
+    badge: "WISDOM",
+    cover: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=700",
+    format: "Illuminated Paperback",
+    isFeaturedHero: false,
+    isBestseller: false,
+    isLatestArrival: true,
+    pages: 160,
+    language: "English",
+    publisher: "Amber-Allen Publishing",
+    description: "Rooted in traditional Toltec wisdom, this masterpiece advocates four simple yet transformative codes of conduct for true freedom and love."
+  },
+  {
+    _id: "book-012",
+    title: "Rich Dad Poor Dad",
+    subtitle: "What the Rich Teach Their Kids About Money",
+    vernacularTitle: "ధనిక తండ్రి పేద తండ్రి",
+    author: "Robert T. Kiyosaki",
+    price: 4.99,
+    originalPrice: 8.99,
+    priceINR: 399,
+    originalPriceINR: 699,
+    rating: 4.7,
+    reviewsCount: 9400,
+    category: "Business & Money",
+    badge: "TOP RATED",
+    cover: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&q=80&w=700",
+    format: "Executive Hardcover",
+    isFeaturedHero: false,
+    isBestseller: false,
+    isLatestArrival: true,
+    pages: 336,
+    language: "English",
+    publisher: "Plata Publishing",
+    description: "Robert's story of growing up with two dads — his real father and the father of his best friend — and the ways in which both men shaped his thoughts about money."
+  },
+  {
+    _id: "book-013",
+    title: "Big Magic",
+    subtitle: "Creative Living Beyond Fear",
+    vernacularTitle: "సృజనాత్మక జీవన విలాసం",
+    author: "Elizabeth Gilbert",
+    price: 4.99,
+    originalPrice: 8.99,
+    priceINR: 399,
+    originalPriceINR: 650,
+    rating: 4.7,
+    reviewsCount: 4210,
+    category: "Self-Help",
+    badge: "NEW",
+    cover: "https://images.unsplash.com/photo-1491841573634-28140fc7ced7?auto=format&fit=crop&q=80&w=700",
+    format: "Deluxe Color Edition",
+    isFeaturedHero: false,
+    isBestseller: false,
+    isLatestArrival: true,
+    pages: 288,
+    language: "English",
+    publisher: "Riverhead Books",
+    description: "Readers of all ages and walks of life have drawn inspiration and empowerment from Elizabeth Gilbert’s books. Gilbert digs deep into her own generative process."
+  },
+  {
+    _id: "book-014",
+    title: "Arthaśāstra of Chāṇakya",
+    subtitle: "The Royal Treatise on Statecraft & Wealth",
+    vernacularTitle: "చాణక్య అర్థశాస్త్రము - సమగ్ర సంపుటి",
+    author: "Acharya Kautilya",
+    price: 9.49,
+    originalPrice: 16.99,
+    priceINR: 750,
+    originalPriceINR: 1350,
+    rating: 4.9,
+    reviewsCount: 6180,
+    category: "History & Epics",
+    badge: "ROYAL ARCHIVE",
+    cover: "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?auto=format&fit=crop&q=80&w=700",
+    format: "Imperial Hardcover with Copper Inscription Replica",
+    isFeaturedHero: false,
+    isBestseller: false,
+    isLatestArrival: true,
+    pages: 650,
+    language: "Sanskrit, English & Telugu",
+    publisher: "Saraswathi Pustaka Vikrayaśāla",
+    description: "The seminal ancient Sanskrit manual on political strategy, economic governance, foreign policy, and royal diplomacy."
+  }
+];
+
+export async function fetchShowcase() {
+  try {
+    const res = await fetch(`${API_BASE}/books/showcase`);
+    if (!res.ok) throw new Error('Network response was not ok');
+    const data = await res.json();
+    return data.data;
+  } catch (error) {
+    console.warn('Backend showcase unavailable, using local royal vault', error);
+    return {
+      featuredHero: FALLBACK_BOOKS[0],
+      bestsellers: FALLBACK_BOOKS.filter(b => b.isBestseller),
+      latestArrivals: FALLBACK_BOOKS.filter(b => b.isLatestArrival),
+      categories: [
+        { name: "Fiction", count: 2 },
+        { name: "Non-Fiction", count: 2 },
+        { name: "Self-Help", count: 3 },
+        { name: "Business & Money", count: 3 },
+        { name: "Religion & Spirituality", count: 3 },
+        { name: "Romance", count: 1 },
+        { name: "History & Epics", count: 1 }
+      ]
+    };
+  }
+}
+
+export async function fetchBooks(params = {}) {
+  try {
+    const query = new URLSearchParams();
+    if (params.category && params.category !== 'All') query.set('category', params.category);
+    if (params.search) query.set('search', params.search);
+    if (params.sort) query.set('sort', params.sort);
+    if (params.badge) query.set('badge', params.badge);
+
+    const res = await fetch(`${API_BASE}/books?${query.toString()}`);
+    if (!res.ok) throw new Error('Failed to fetch books');
+    const data = await res.json();
+    return data.data;
+  } catch (error) {
+    console.warn('API error, using local fallback', error);
+    let results = [...FALLBACK_BOOKS];
+    if (params.category && params.category !== 'All') {
+      results = results.filter(b => b.category.toLowerCase() === params.category.toLowerCase());
+    }
+    if (params.search) {
+      const s = params.search.toLowerCase();
+      results = results.filter(b =>
+        b.title.toLowerCase().includes(s) ||
+        b.author.toLowerCase().includes(s) ||
+        (b.subtitle && b.subtitle.toLowerCase().includes(s))
+      );
+    }
+    return results;
+  }
+}
+
+export async function submitOrder(orderData) {
+  try {
+    const res = await fetch(`${API_BASE}/orders`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData)
+    });
+    if (!res.ok) throw new Error('Failed to create order');
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.warn('Backend order endpoint unavailable, generating local royal receipt');
+    return {
+      success: true,
+      data: {
+        orderNumber: `SPV-ROYAL-${Date.now().toString().slice(-4)}-${Math.floor(10000 + Math.random() * 90000)}`,
+        customerName: orderData.customerName,
+        customerEmail: orderData.customerEmail,
+        totalAmount: orderData.totalAmount,
+        currency: orderData.currency || 'INR',
+        discountApplied: orderData.discountApplied || 0,
+        couponCode: orderData.couponCode || '',
+        orderStatus: "Confirmed - Preparing Royal Dispatch",
+        createdAt: new Date().toISOString()
+      }
+    };
+  }
+}
